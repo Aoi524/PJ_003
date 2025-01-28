@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG</title>
+</head>
+<body>
+    <h1>BLOG</h1>
+        {% if blogs == [] %}
+            <p>投稿済みのブログはありません</p>
+        {% else %}
+            <table border="1">
+                <tr>
+                    <th>投稿日</th>
+                    <th>タイトル</th>
+                    <th>内容</th>
+                </tr>
+                {% for blog in blogs %}
+                    <tr>
+                        <td>{{ blog.post_date }}</td>
+                        <td>{{ blog.title }}</td>
+                        <td>{{ blog.body }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    <br>
+    <a href="{{ url_for('form') }}">投稿</a>
+</body>
+</html>

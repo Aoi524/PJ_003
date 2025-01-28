@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG</title>
+</head>
+<body>
+    <h1>BLOG</h1>
+    <form method="post" action="{{ url_for('register') }}">
+        <table border="1">
+            <tr>
+                <th>投稿日</th>
+                <th>タイトル</th>
+                <th>内容</th>
+            </tr>
+            <tr>
+                <td><input type="date" name="post_date"></td>
+                <td><input type="text" name="title"></td>
+                <td><input type="text" name="body"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="登録">
+    </form>
+</body>
+</html>
