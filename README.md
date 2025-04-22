@@ -26,3 +26,19 @@ docker compose up -d --build
 # Config Environement file
 
 - Config debug Mode (DEBUG=True or False)
+
+# Initialize database
+
+First, Login todo-app container with the following command
+
+```shell
+docker exec -it todo-app bash
+```
+
+Second, Initialize database with the following command
+
+```shell
+flask db init
+flask db migrade
+flask db upgrade
+```
