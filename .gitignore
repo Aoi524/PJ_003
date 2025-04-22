@@ -174,4 +174,4 @@ cython_debug/
 .pypirc
 
 # Development: Database files
-migrations/*
+migrations/
