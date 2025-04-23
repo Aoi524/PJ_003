@@ -47,7 +47,19 @@ def toggle_complete(id):
         return redirect('/')
     except:
         db.session.rollback()
-        return 'There was an issue updating your task'
+        return 'There was an issue updating the task'
+
+@app.route('/delete_task/<int:id>', methods=['POST'])
+def delete_task(id):
+    task = Task.query.get_or_404(id)
+
+    try:
+        db.session.delete(task)
+        db.session.commit()
+        return redirect('/')
+    except:
+        db.session.rollback()
+        return 'There was an issue deleting the task'
 
 if __name__ == '__main__':
     DEBUG = os.getenv('DEBUG', 'FALSE')
