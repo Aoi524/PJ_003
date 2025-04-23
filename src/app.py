@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
@@ -18,7 +18,24 @@ class Task(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    tasks = Task.query.all()
+    return render_template('index.html', tasks=tasks)
+
+@app.route('/add_task', methods=['GET','POST'])
+def add_task():
+    if request.method == 'POST':
+        task_content = request.form['content']
+        new_task = Task(content=task_content)
+
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect('/')
+        except:
+            db.session.rollback()
+            return 'There was an issue adding your task'
+
+    return render_template('add_task.html')
 
 if __name__ == '__main__':
     DEBUG = os.getenv('DEBUG', 'FALSE')
