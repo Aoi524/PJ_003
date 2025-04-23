@@ -37,6 +37,18 @@ def add_task():
 
     return render_template('add_task.html')
 
+@app.route('/toggle_complete/<int:id>', methods=['POST'])
+def toggle_complete(id):
+    task = Task.query.get_or_404(id)
+    task.completed = not task.completed
+
+    try:
+        db.session.commit()
+        return redirect('/')
+    except:
+        db.session.rollback()
+        return 'There was an issue updating your task'
+
 if __name__ == '__main__':
     DEBUG = os.getenv('DEBUG', 'FALSE')
     app.run(host='0.0.0.0', debug=DEBUG)

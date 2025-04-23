@@ -9,7 +9,13 @@
     <h1>Todo List</h1>
     <ul>
         {% for task in tasks %}
-            <li>{{ task.content }}</li>
+            <li>
+                <form method="POST" action="{{ url_for('toggle_complete', id=task.id) }}">
+                    <label for="task_{{ task.id }}">{{ task.content }}</label>
+                        <input type="checkbox" id="task_{{ task.id }}" name="task_{{ task.id }}"
+                            {% if task.completed %}checked{% endif %} onchange="this.form.submit()">
+                </form>
+            </li>
         {% endfor %}
     </ul>
     <a href="add_task">Add Task</a>
