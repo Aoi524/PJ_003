@@ -39,6 +39,6 @@ Second, Initialize database with the following command
 
 ```shell
 flask db init
-flask db migrade
+flask db migrate
 flask db upgrade
 ```
