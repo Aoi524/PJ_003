@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todoリスト</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100">
 
@@ -16,7 +17,7 @@
         <form action="{{ route('tasks.store')}}" method="POST" class="mb-4">
             @csrf
             <div class="flex mb-2">
-                <input type="text" name="task_name" class="border border-gray-300 p-2">
+                <input type="text" name="task_name" class="border border-gray-300 w-full">
                 <input type="datetime-local" name="due_date" class="border p-2 ml-2">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">追加</button>
             </div>
