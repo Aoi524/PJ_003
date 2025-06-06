@@ -20,7 +20,7 @@
                     <span class="text-gray-700">{{ $task->task_name }}</span>
                     <form action="{{ route('tasks.recover', $task->id) }}" method="POST" class="inline-block ml-2">
                         @csrf
-                        @method('PUT')
+                        @method('POST')
                         <button type="button" onclick="recoverTask()" class="bg-green-300 text-white px-2 py-1 rounded">復元</button>
                     </form>
                 </li>
