@@ -12,6 +12,7 @@
     <div class="container mx-auto p-4">
         <nav class="flex justify-between">
             <h1 class="text-2xl font-bold mb-4">Todoリスト</h1>
+            <a href="{{ route('tasks.trash') }}" class="bg-gray-300 p-2 mb-2 rounded">ゴミ箱</a>
         </nav>
         
         <form action="{{ route('tasks.store')}}" method="POST" class="mb-4">
@@ -22,12 +23,11 @@
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">追加</button>
             </div>
         </form>
+        <ul>
+            @foreach ($tasks as $task)
+                <li>{{ $task->task_name }}</li>
+            @endforeach
+        </ul>
     </div>
-
-    <ul>
-        @foreach ($tasks as $task)
-            <li>{{ $task->task_name }}</li>
-        @endforeach
-    </ul>
 </body>
 </html>

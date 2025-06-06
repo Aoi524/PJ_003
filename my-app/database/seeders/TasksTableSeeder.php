@@ -14,7 +14,14 @@ class TasksTableSeeder extends Seeder
     {
         $tasks = [
             [
-                'task_name' => 'Trash Task',
+                'task_name' => 'Trash Task1',
+                'due_date' => now()->addDays(5),
+                'is_deleted' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'task_name' => 'Trash Task2',
                 'due_date' => now()->addDays(5),
                 'is_deleted' => true,
                 'created_at' => now(),

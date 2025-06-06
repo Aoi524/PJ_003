@@ -12,6 +12,7 @@
     <div class="container mx-auto p-4">
         <nav class="flex justify-between">
             <h1 class="text-2xl font-bold mb-4">Todoリスト-ゴミ箱</h1>
+            <a href="{{ route('tasks.index') }}" class="border border-blue-500 hover:bg-blue-700 hover:text-white p-2 mb-2 rounded">TOP</a>
         </nav>
         <ul class="list-disc pl-5">
             @foreach ($tasks as $task)
@@ -20,7 +21,7 @@
                     <form action="{{ route('tasks.recover', $task->id) }}" method="POST" class="inline-block ml-2">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="bg-green-300 text-white px-2 py-1 rounded">復元</button>
+                        <button type="button" onclick="recoverTask()" class="bg-green-300 text-white px-2 py-1 rounded">復元</button>
                     </form>
                 </li>
             @endforeach
@@ -38,6 +39,11 @@
     </div>
 </body>
 <script>
+    function recoverTask() {
+        if (confirm('このタスクを復元しますか？')) {
+            event.target.form.submit();
+        }
+    }
     function permanentDelete() {
         if (confirm('ゴミ箱を空にしますか？')) {
             event.target.form.submit();
