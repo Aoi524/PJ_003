@@ -41,7 +41,7 @@ class Task extends Model
         return $task;
     }
 
-    public static function deleteTrashTaskPermanently()
+    public static function deleteTrashTaskPermanently(): int
     {
         return self::where('is_deleted', true)->delete();
     }

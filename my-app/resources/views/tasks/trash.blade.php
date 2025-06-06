@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todoリスト-ゴミ箱</title>
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-300">
@@ -25,10 +25,10 @@
                 </li>
             @endforeach
             @if(count($tasks) > 0)
-                <form action="{{ route('tasks.deleteTrash') }}" method="POST" class="inline-block ml-2">
+                <form action="{{ route('tasks.deleteTrash') }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="button" onclick="permanentDelete()" class="bg-red-500 text-white px-2 py-1 rounded">完全削除</button>
+                    <button type="submit" onclick="permanentDelete()" class="bg-red-500 text-white px-2 py-1 rounded">完全削除</button>
                 </form>
             @endif
         </ul>
@@ -37,4 +37,11 @@
         @endif
     </div>
 </body>
+<script>
+    function permanentDelete() {
+        if (confirm('ゴミ箱を空にしますか？')) {
+            event.target.form.submit();
+        }
+    }
+</script>
 </html>

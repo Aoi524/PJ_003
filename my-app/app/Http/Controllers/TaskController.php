@@ -26,7 +26,7 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function destroy($id)
+    public function maskAsDelete($id)
     {
         Task::maskAsDeleted($id);
         return redirect()->route('tasks.index');

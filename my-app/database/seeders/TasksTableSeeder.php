@@ -14,9 +14,9 @@ class TasksTableSeeder extends Seeder
     {
         $tasks = [
             [
-                'task_name' => 'Timezone Conversion Test',
+                'task_name' => 'Trash Task',
                 'due_date' => now()->addDays(5),
-                'is_deleted' => false,
+                'is_deleted' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
