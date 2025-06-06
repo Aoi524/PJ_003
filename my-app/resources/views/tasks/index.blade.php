@@ -10,7 +10,7 @@
 <body class="bg-gray-100">
 
     <div class="container mx-auto p-4 md:w-6/12">
-        <nav class="flex justify-between md:justify-normal">
+        <nav class="flex justify-between">
             <h1 class="text-2xl font-bold mb-4">Todoリスト</h1>
             <a href="{{ route('tasks.trash') }}" class="bg-gray-300 p-2 mb-2 rounded">ゴミ箱</a>
         </nav>
@@ -33,18 +33,20 @@
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">追加</button>
             </div>
         </form>
-        <ul class="list-disc mx-auto pl-5 text-sm md:w-6/12">
-            @foreach ($tasks as $task)
-                <li class="flex justify-between md:justify-normal mb-2">
-                    <div>{{ $task->task_name }} : <span class="mx-1">{{ date('Y-m-d H:i', strtotime($task->due_date)) }}</span></div>
-                    <form action="{{ route('tasks.maskAsDelete', $task->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="bg-green-500 text-white px-2 py-1 rounded">Done!</button>
-                    </form>
-                </li>
-            @endforeach
-        </ul>
+        <div>
+            <ul class="list-disc text-sm md:w-6/12">
+                @foreach ($tasks as $task)
+                    <li class="flex justify-between mb-2">
+                        <div>{{ $task->task_name }} : <span class="mx-1">{{ date('Y-m-d H:i', strtotime($task->due_date)) }}</span></div>
+                        <form action="{{ route('tasks.maskAsDelete', $task->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="bg-green-500 text-white px-2 py-1 rounded">Done!</button>
+                        </form>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 </body>
 </html>
