@@ -48,10 +48,13 @@
             </div>
             {% if book %}
             <div class="col-4 col-md-3">
-                <button type="button" class="btn btn-danger w-100">削除</button>
+                <button type="button" class="btn btn-danger w-100" onclick="if(confirm('本当に削除しますか？')){ document.getElementById('delete-form').submit(); }">削除</button>
             </div>
             {% endif %}
         </div>
     </div>
 </form>
+{% if book %}
+<form id="delete-form" action="/delete/{{ book.id }}" method="POST" style="display:none;"></form>
+{% endif %}
 {% endblock %}

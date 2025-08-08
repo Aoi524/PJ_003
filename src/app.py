@@ -26,18 +26,18 @@ def index():
     books = Book.query.all()
     return render_template('index.html', books=books)
 
-# 書籍の登録画面の表示
+# 書籍情報の登録画面の表示
 @app.route('/register', methods=['GET'])
 def register():
     return render_template('register_book.html')
 
-# 書籍の編集画面の表示
+# 書籍情報の編集画面の表示
 @app.route('/update/<id>', methods=['GET'])
 def update(id):
     book = Book.query.filter_by(id=id).first()
     return render_template('register_book.html', book=book)
 
-# 書籍の登録
+# 書籍情報の登録
 @app.route('/register', methods=['POST'])
 def register_book():
     title = request.form['title']
@@ -61,7 +61,7 @@ def register_book():
     db.session.commit()
     return redirect(url_for('index'))
 
-# 書籍の編集
+# 書籍情報の編集
 @app.route('/update/<id>', methods=['POST'])
 def update_book(id):
     title = request.form['title']
@@ -83,6 +83,14 @@ def update_book(id):
 
     db.session.commit()
 
+    return redirect(url_for('index'))
+
+# 書籍情報の削除
+@app.route('/delete/<id>', methods=['POST'])
+def delete_book(id):
+    book = Book.query.filter_by(id=id).first()
+    db.session.delete(book)
+    db.session.commit()
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
