@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -27,9 +27,33 @@ def index():
     return render_template('index.html', books=books)
 
 # 書籍の登録画面の表示
-@app.route('/register')
-def register_book():
+@app.route('/register', methods=['GET'])
+def register():
     return render_template('register_book.html')
+
+# 書籍の登録
+@app.route('/register', methods=['POST'])
+def register_book():
+    title = request.form['title']
+    author = request.form['author']
+    publisher = request.form['publisher']
+    published_date = request.form['published_date']
+    isbn = request.form['isbn']
+    status = request.form['status']
+    readed_date = request.form['readed_date'] if request.form['readed_date'] else None
+
+    book = Book(
+        title=title,
+        author=author,
+        publisher=publisher,
+        published_date=published_date,
+        isbn=isbn,
+        status=status,
+        readed_date=readed_date
+    )
+    db.session.add(book)
+    db.session.commit()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
