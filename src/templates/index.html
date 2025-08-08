@@ -26,13 +26,13 @@
         <tbody>
             {% for book in books %}
             <tr>
-                <td>{{ book.title }}</td>
+                <td><a href="/update/{{ book.id }}" class="link-underline link-underline-opacity-0">{{ book.title }}</a></td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.publisher }}</td>
                 <td>{{ book.published_date }}</td>
                 <td>{{ book.isbn }}</td>
                 <td>{{ book.status }}</td>
-                <td>{% if book.readed_date == 'None' %} {{ book.readed_date }} {% endif %}</td>
+                <td>{% if book.readed_date != None %} {{ book.readed_date }} {% endif %}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -45,7 +45,7 @@
         <tbody>
             <tr>
                 <th>タイトル</th>
-                <td>{{ book.title }}</td>
+                <td><a href="/update/{{ book.id }}" class="link-underline link-underline-opacity-0">{{ book.title }}</a></td>
             </tr>
             <tr>
                 <th>著者</th>
@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <th>読了日</th>
-                <td>{% if book.readed_date == 'None' %} {{ book.readed_date }} {% endif %}</td>
+                <td>{% if book.readed_date != None %} {{ book.readed_date }} {% endif %}</td>
             </tr>
         </tbody>
     </table>
