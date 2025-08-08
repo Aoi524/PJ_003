@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>書籍管理アプリケーション</title>
+    <title>書籍一覧</title>
 </head>
 <body>
     <h1>書籍管理アプリケーション</h1>
+    {% if not books %}
+    <p>書籍情報が登録されていません。</p>
+    {% else %}
+    {% for book in books %}
+    <div>
+        <h2>タイトル：{{ book.title }}</h2>
+        <p>著者：{{ book.author }}</p>
+        <p>出版社：{{ book.publisher }}</p>
+        <p>出版日：{{ book.published_date }}</p>
+        <p>ISBN：{{ book.isbn }}</p>
+        <p>ステータス：{{ book.status }}</p>
+        <p>読了日：{{ book.readed_date }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
 </body>
 </html>
