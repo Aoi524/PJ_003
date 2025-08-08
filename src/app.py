@@ -26,5 +26,10 @@ def index():
     books = Book.query.all()
     return render_template('index.html', books=books)
 
+# 書籍の登録画面の表示
+@app.route('/register')
+def register_book():
+    return render_template('register_book.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
