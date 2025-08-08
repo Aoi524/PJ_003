@@ -3,21 +3,78 @@
 {% block title %}書籍一覧{% endblock %}
 
 {% block content %}
-<h1>書籍管理アプリケーション</h1>
-<button onclick="location.href='/register'">書籍の登録</button>
+<div class="my-3">
+    <button onclick="location.href='/register'">書籍の登録</button>
+</div>
 {% if not books %}
 <p>書籍情報が登録されていません。</p>
 {% else %}
-{% for book in books %}
-<div>
-    <h2>タイトル：{{ book.title }}</h2>
-    <p>著者：{{ book.author }}</p>
-    <p>出版社：{{ book.publisher }}</p>
-    <p>出版日：{{ book.published_date }}</p>
-    <p>ISBN：{{ book.isbn }}</p>
-    <p>ステータス：{{ book.status }}</p>
-    <p>読了日：{{ book.readed_date }}</p>
+<!-- PC用：768px以上で表示 -->
+<div class="d-none d-md-block mb-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>著者</th>
+                <th>出版社</th>
+                <th>出版日</th>
+                <th>ISBN</th>
+                <th>ステータス</th>
+                <th>読了日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.published_date }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.status }}</td>
+                <td>{% if book.readed_date == 'None' %} {{ book.readed_date }} {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-{% endfor %}
+<!-- スマホ用：768px未満で表示 -->
+<div class="d-block d-md-none mb-3">
+    {% for book in books %}
+    <table class="table mb-5">
+        <tbody>
+            <tr>
+                <th>タイトル</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <th>著者</th>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <th>出版社</th>
+                <td>{{ book.publisher }}</td>
+            </tr>
+            <tr>
+                <th>出版日</th>
+                <td>{{ book.published_date }}</td>
+            </tr>
+            <tr>
+                <th>ISBN</th>
+                <td>{{ book.isbn }}</td>
+            </tr>
+            <tr>
+                <th>ステータス</th>
+                <td>{{ book.status }}</td>
+            </tr>
+            <tr>
+                <th>読了日</th>
+                <td>{% if book.readed_date == 'None' %} {{ book.readed_date }} {% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
 {% endif %}
+
 {% endblock %}
