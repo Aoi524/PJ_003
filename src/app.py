@@ -31,6 +31,12 @@ def index():
 def register():
     return render_template('register_book.html')
 
+# 書籍の編集画面の表示
+@app.route('/update/<id>', methods=['GET'])
+def update(id):
+    book = Book.query.filter_by(id=id).first()
+    return render_template('register_book.html', book=book)
+
 # 書籍の登録
 @app.route('/register', methods=['POST'])
 def register_book():
@@ -53,6 +59,30 @@ def register_book():
     )
     db.session.add(book)
     db.session.commit()
+    return redirect(url_for('index'))
+
+# 書籍の編集
+@app.route('/update/<id>', methods=['POST'])
+def update_book(id):
+    title = request.form['title']
+    author = request.form['author']
+    publisher = request.form['publisher']
+    published_date = request.form['published_date']
+    isbn = request.form['isbn']
+    status = request.form['status']
+    readed_date = request.form['readed_date'] if request.form['readed_date'] else None
+
+    book = Book.query.filter_by(id=id).first()
+    book.title = title
+    book.author = author
+    book.publisher = publisher
+    book.published_date = published_date
+    book.isbn = isbn
+    book.status = status
+    book.readed_date = readed_date
+
+    db.session.commit()
+
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
